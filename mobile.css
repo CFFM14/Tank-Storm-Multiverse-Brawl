@@ -39,12 +39,15 @@
 #mobileStatus{flex:1;font:12px sans-serif;color:#4e5849;text-align:center}
 #mobileUI #mobileBar button{min-height:30px;padding:2px 12px;font-size:12px;background:#eee6d5df}
 #touchControls{position:fixed;inset:44px max(12px,env(safe-area-inset-right)) max(20px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));z-index:20;display:flex;align-items:end;justify-content:space-between;pointer-events:none}
-#mobileStick{position:relative;width:104px;height:104px;border-radius:50%;border:1px solid #737e6666;background:radial-gradient(circle,#727e6326,#eee6d599);pointer-events:auto;touch-action:none;user-select:none;box-shadow:inset 0 0 0 10px #eee6d555}
+#mobileStickZone{position:fixed;left:0;top:44px;bottom:0;width:50%;pointer-events:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+#mobileStick{position:fixed;left:max(12px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));opacity:.45;width:104px;height:104px;border-radius:50%;border:1px solid #737e6666;background:radial-gradient(circle,#727e6326,#eee6d599);pointer-events:none;touch-action:none;user-select:none;box-shadow:inset 0 0 0 10px #eee6d555}
+#mobileStick.active{opacity:1}
+#mobileStick.active small{display:none}
 #mobileStick:before,#mobileStick:after{content:'';position:absolute;left:50%;top:15%;height:70%;width:1px;background:#70785e33}
 #mobileStick:after{transform:rotate(90deg)}
 #mobileKnob{position:absolute;left:50%;top:50%;width:44px;height:44px;transform:translate(-50%,-50%);border:1px solid #616e56;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e2e5d1,#839375);box-shadow:0 3px 8px #363f3033;z-index:1;pointer-events:none}
 #mobileStick small{position:absolute;bottom:-20px;width:100%;text-align:center;font:10px sans-serif;color:#5c6553;letter-spacing:2px}
-.mobile-right{display:flex;flex-direction:column;align-items:center;gap:12px;pointer-events:auto}
+.mobile-right{margin-left:auto;display:flex;flex-direction:column;align-items:center;gap:12px;pointer-events:auto}
 #mobileUI #mobileFire{width:86px;height:86px;border-radius:50%;background:#a13d30;color:#fff1dd;border:4px solid #e5d5b9;box-shadow:0 0 0 1px #a13d3066,0 4px 12px #7d36242b;font-size:23px;letter-spacing:3px;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
 #mobileFire span{display:block;font:9px sans-serif;letter-spacing:2px;margin-top:2px;opacity:.7}
 #mobileUI #mobileFire.held{background:#723126;transform:scale(.94)}
