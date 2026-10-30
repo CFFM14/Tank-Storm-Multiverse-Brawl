@@ -1,6 +1,6 @@
 /* 独立的横屏触屏界面。桌面设备不创建这些元素，不改变游戏操作。 */
 function initMobileControls(api) {
-  if (!(matchMedia('(any-pointer: coarse)').matches || navigator.maxTouchPoints > 0) || Math.min(screen.width, screen.height) > 900) return;
+  if (!matchMedia('(pointer: coarse)').matches || Math.min(screen.width, screen.height) > 900 || Math.max(screen.width, screen.height) > 1200) return;
   document.documentElement.classList.add('touch-game');
   const root = document.createElement('div'); root.id = 'mobileUI';
   root.innerHTML = `
