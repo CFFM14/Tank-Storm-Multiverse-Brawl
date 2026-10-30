@@ -976,7 +976,7 @@ body,button,input,select,textarea,kbd{font-family:var(--font-ink)}
 }
 .pscore,.pkda,.bnum,.timer,.pslot{font-variant-numeric:tabular-nums}
 </style>
-<link rel="stylesheet" href="mobile.css">
+<link rel="stylesheet" href="mobile.css?v=2">
 </head>
 <body>
 <div id="app">
@@ -1467,7 +1467,7 @@ body,button,input,select,textarea,kbd{font-family:var(--font-ink)}
   </div>
 </div>
 
-<script src="mobile.js"></script>
+<script src="mobile.js?v=2"></script>
 <script>
 (function () {
 'use strict';
@@ -11397,19 +11397,26 @@ try {
   if (n >= 2 && n <= 4) setTimeout(() => startGame(n), 120);
 } catch (e) {}
 
-// 触控输入复用现有键盘链路，联机预测也能收到相同输入。
+// 移动端界面与输入桥接；非移动端不会修改玩家或布局。
 initMobileControls({
   state: () => S,
-  scheme: () => Net.on ? (Net.myScheme || 0) : (S.players.find(p => !p.bot)?.scheme || 0),
-  keyboard: () => {
-    if (Net.on) Net.myScheme = 0;
-    else {
-      const p = S.players.find(p => !p.bot);
-      if (p && p.isMouse) { p.isMouse = false; p.scheme = 0; p.keys = KEYMAP[0]; }
-    }
+  drive: (x, y, firing) => {
+    const p = S.players.find(p => !p.bot);
+    if (!p) return;
+    p.isMouse = true;
+    mouse.left = Math.hypot(x, y) > 0.16 && !S.placing;
+    mouse.x = p.x + x * 1000; mouse.y = p.y + y * 1000;
+    mouse.right = firing && !S.placing;
   },
-  map: sc => KEYMAP[sc === 2 ? 0 : sc],
-  slots: sc => SIEGE_SLOT_KEYS[sc],
+  start: (mode, allies) => {
+    schemeOf[0] = 2;
+    if (mode === 'siege') startSiegeMulti(1, allies);
+    else startGame(mode === 'duel' ? 2 : 3, mode === 'duel' ? 1 : 2, mode === 'hunt' ? [0,1,1] : null);
+  },
+  pause: () => { if (S.mode === 'playing') S.mode = 'paused'; else if (S.mode === 'paused') S.mode = 'playing'; },
+  home: backToMenu,
+  next: nextRound,
+  build: () => { if (S.placing) cancelGenPlacement(); else startGenPlacement(); },
   place: e => { if (S.placing === 'gen') { const p = canvasPos(e); placeGeneratorAt(p.x, p.y); } }
 });
 requestAnimationFrame(loop);
