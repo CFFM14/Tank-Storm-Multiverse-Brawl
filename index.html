@@ -1467,7 +1467,7 @@ body,button,input,select,textarea,kbd{font-family:var(--font-ink)}
   </div>
 </div>
 
-<script src="mobile.js?v=2"></script>
+<script src="mobile.js?v=3"></script>
 <script>
 (function () {
 'use strict';
@@ -3208,7 +3208,8 @@ function update(dt) {
       if (ml) {
         const want = Math.atan2(my - p.y, mx - p.x);
         const diff = angDiff(p.a, want);
-        const maxTurn = TANK_TURN * 2.4 * dt;
+        // 摇杆与键盘共用转速上限；桌面鼠标保留原有手感。
+        const maxTurn = TANK_TURN * (p.touchDrive ? 1 : 2.4) * dt;
         rotateTank(p, clamp(diff, -maxTurn, maxTurn));
         // 鼠标方案本来就是「偏差越大转越快」的模拟量，不需要再挂舵量过渡；
         // 这里只是记一下归一化舵量，给履带差速动画用（数值不进物理）
@@ -5789,7 +5790,7 @@ function drawCursor() {
   if (S.mode !== 'playing' && S.mode !== 'countdown') return;
   let p3 = null;
   for (const q of S.players) if (q.isMouse) { p3 = q; break; }
-  if (!p3 || !p3.alive) return;
+  if (!p3 || !p3.alive || p3.touchDrive) return;
 
   const x = mouse.x, y = mouse.y;
   ctx.save();
@@ -11404,6 +11405,7 @@ initMobileControls({
     const p = S.players.find(p => !p.bot);
     if (!p) return;
     p.isMouse = true;
+    p.touchDrive = true;
     mouse.left = Math.hypot(x, y) > 0.16 && !S.placing;
     mouse.x = p.x + x * 1000; mouse.y = p.y + y * 1000;
     mouse.right = firing && !S.placing;
@@ -11441,7 +11443,7 @@ if (typeof globalThis !== 'undefined' && globalThis.__GAME_HOOK__) {
     tankHitsWalls, hullPointDist, hullWallDist, resolveHull, rotateTank,
     HULL_HL, HULL_HW, HULL_CR, HULL_REACH,
     TANK_ART_R, TANK_ART_MAX,
-    SCHEMES, schemeOf, pickScheme, drawAimPreview,
+    SCHEMES, schemeOf, pickScheme, drawAimPreview, drawCursor,
     // 人机（供无头测试白盒验证：轨迹预测 / 射击解 / 躲闪）
     BOT, TRAVEL_AI, botTravel, botTrace, botShotHits, botFindShot, botChoose, botSimScore,
     botThreats, botDecide, botThink, botLaserAngle, botLaserHits,
