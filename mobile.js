@@ -7,12 +7,12 @@ function initMobileControls(api) {
     <section id="mobileRotate"><div class="rotate-icon">↻</div><h2>横过手机，准备出击</h2><p>横屏下使用左侧摇杆移动，右侧按钮开火</p><button data-do="fullscreen">进入全屏横屏</button><small>也可以开启系统自动旋转后横放手机</small></section>
     <section id="mobileMenu" class="mobile-screen">
       <header><div><span class="mobile-eyebrow">TANK STORM · MOBILE</span><h1>坦克<span>风云</span><small>多元乱斗</small></h1></div><button class="mobile-quiet" data-do="fullscreen">全屏 ↗</button></header>
-      <div class="mobile-menu-body"><aside><b>指尖上的坦克战场</b><p>左侧任意落指，拖动决定方向。<br>按住开火，边走边战。</p><div class="mobile-legend">◎ 左侧落指后拖动<br>◉ 右手开火<br>↗ 子弹反弹，小心自己</div></aside>
+      <div class="mobile-menu-body"><aside><b>指尖上的<br>坦克战场</b><p>左手拖动，控制方向。<br>右手开火，边走边战。</p><div class="mobile-legend">◎ 左侧落指后拖动<br>◉ 右手开火<br>↗ 子弹反弹，小心自己</div></aside>
       <div class="mobile-modes">
-        <button data-mode="duel"><span>01 / DUEL</span><b>单挑电脑</b><small>一对一，练习走位与反弹</small><i>出击 →</i></button>
-        <button data-mode="brawl"><span>02 / BRAWL</span><b>人机混战</b><small>你和两台电脑，各自为战</small><i>出击 →</i></button>
-        <button data-mode="hunt"><span>03 / SURVIVE</span><b>人机围剿</b><small>两台电脑联手，挑战突围</small><i>出击 →</i></button>
-        <button data-mode="siege"><span>04 / DEFEND</span><b>丧尸围城</b><small>守住工厂，抵挡十二波进攻</small><label>人机队友 <select id="mobileAllies" aria-label="围城人机队友数量"><option value="0">不带队友</option><option value="1">1 名</option><option value="2">2 名</option></select></label><i>出击 →</i></button>
+        <button data-mode="duel"><span>01 / DUEL</span><b>单挑电脑</b><small>一对一，练习走位与反弹</small><i aria-hidden="true">↗</i></button>
+        <button data-mode="brawl"><span>02 / BRAWL</span><b>人机混战</b><small>你和两台电脑，各自为战</small><i aria-hidden="true">↗</i></button>
+        <button data-mode="hunt"><span>03 / SURVIVE</span><b>人机围剿</b><small>两台电脑联手，挑战突围</small><i aria-hidden="true">↗</i></button>
+        <button data-mode="siege"><span>04 / DEFEND</span><b>丧尸围城</b><small>守住工厂，抵挡十二波进攻</small><label>人机队友 <select id="mobileAllies" aria-label="围城人机队友数量"><option value="0">不带队友</option><option value="1">1 名</option><option value="2">2 名</option></select></label><i aria-hidden="true">↗</i></button>
       </div></div><footer>单人游玩 · 摇杆驾驶 · 拾取道具后开火发动</footer>
     </section>
     <header id="mobileBar"><b>坦克风云</b><span id="mobileStatus"></span><button data-do="fullscreen" aria-label="全屏">↗</button><button data-do="pause">暂停 Ⅱ</button></header>
